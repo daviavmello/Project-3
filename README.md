@@ -3,6 +3,8 @@ Starter MERN application with Passport user authentication using Javascript Web 
 
 Built following the tutorial at https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669 with slight variations added by me
 
+--------------------------------------------------
+
 Budgeting App(Name is a work in progress) ReactJS based app/
 
 1.) Will have user log in
