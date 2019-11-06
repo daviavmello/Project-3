@@ -7,8 +7,8 @@ class Navbar extends Component {
             <div className="navbar-fixed">
                 <nav className="z-depth-0">
                     <div className="nav-wrapper white">
-                        <Link to="/" className="col s5 brand-logo center black-text" style={{ fontFamily: "monospace" }}>
-                            <i className="material-icons">code</i> MERN
+                        <Link to="/" className="col s5 brand-logo center black-text" style={{ fontFamily: "monospace", fontSize: 2 , }}>
+                            <h4>Specs Finance</h4>
                         </Link>
                     </div>
                 </nav>
