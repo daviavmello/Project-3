@@ -1,3 +1,4 @@
+// Validates the user information 
 const Validator = require('validator');
 const isEmpty = require('is-empty');
 
