@@ -1,32 +1,22 @@
 {
-  "name": "disneyunitedway-mern",
+  "name": "project-3",
   "version": "1.0.0",
-  "description": "Disney United Way Cast Donation Portal",
+  "description": "Starter MERN application with Passport user authentication using Javascript Web Tokens and Redux",
   "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
-    "client-install": "npm install --prefix client",
-    "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "author": "Richard G. Scates",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davimello/Project-3.git"
+  },
+  "author": "Davi Mello and Marcus Ellington",
   "license": "ISC",
-  "dependencies": {
-    "axios": "^0.19.0",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "concurrently": "^4.1.1",
-    "express": "^4.17.1",
-    "is-empty": "^1.2.0",
-    "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.14",
-    "mongoose": "^5.6.4",
-    "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0",
-    "validator": "^11.1.0"
+  "bugs": {
+    "url": "https://github.com/davimello/Project-3/issues"
   },
-  "devDependencies": {
-    "nodemon": "^1.19.1"
-  }
+  "homepage": "https://github.com/davimello/Project-3#readme"
 }
