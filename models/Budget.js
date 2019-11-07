@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const BudgetSchema = new Schema({
   item: { type: String, required: true },
-  synopsis: String
+  price: String
 });
 
 
