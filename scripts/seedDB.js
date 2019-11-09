@@ -10,17 +10,25 @@ mongoose.connect(
 
 
 
-const budgetSeed = [
-    {
-      income: 3000
-    },
-    {
-      income: 4000
-    },
-    {
-      income: 5000
-    }
+const budgetSeed  = [
+{
+  description: "shirt"
+},
+{
+  amount : 1000
+},
+{
+  date:"11/9/2019"
+},
+{
+  income: true
+},
+{
+  category: "test"
+}
+
 ];
+  
 
 
   Budget.remove({})
