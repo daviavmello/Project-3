@@ -6,7 +6,7 @@ class Budget extends Component {
     constructor() {
         super();
         this.state = {
-            salary: "",
+            income: "",
             errors: {}
         };
     }
@@ -19,7 +19,7 @@ class Budget extends Component {
         e.preventDefault();
 
         const budget = {
-            salary: this.state.salary
+            income: this.state.income
         };
 
         // console.log(budget);
@@ -37,13 +37,13 @@ class Budget extends Component {
                         </Link>
                         <div className="col s12 center" style={{ paddingLeft: "11.250px" }}>
                             <h4>
-                                What's your monthly <b>salary</b>:
+                                What's your monthly <b>income</b>:
                             </h4>
                         </div>
                         <form onSubmit={this.onSubmit}>
                             <div className="input-field col s12">
-                                <input onChange={this.onChange} value={this.state.salary} error={errors.name} name="name" type="text" className={classnames("", { invalid: errors.name })} />
-                                <label htmlFor="name">Your current salary</label>
+                                <input onChange={this.onChange} value={this.state.name} error={errors.name} name="name" type="text" className={classnames("", { invalid: errors.name })} />
+                                <label htmlFor="name">Your current income</label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>

@@ -12,13 +12,13 @@ mongoose.connect(
 
 const budgetSeed = [
     {
-      salary: 3000
+      income: 3000
     },
     {
-      salary: 4000
+      income: 4000
     },
     {
-      salary: 5000
+      income: 5000
     }
 ];
 

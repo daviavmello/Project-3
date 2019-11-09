@@ -12,10 +12,10 @@ router.route("/add").post((req, res) => {
   console.log("back end")
 
   console.log(req.body)
-  let userBudget = req.body.salary;
+  let userBudget = req.body.income;
 
-  Budget.create({salary: userBudget})
-    .then(() => res.json("Salary added!"))
+  Budget.create({income: userBudget})
+    .then(() => res.json("Income added!"))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -33,4 +33,4 @@ module.exports = router;
 //   .put(budgetController.update)
 //   .delete(budgetController.remove);
 
-module.exports = router;
+// module.exports = router;
