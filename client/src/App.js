@@ -14,6 +14,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import PrivateRoute from './components/private-route/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
+import Budget from './components/budget/Budget';
 
 if(localStorage.jwtToken){
     const token = localStorage.jwtToken;
@@ -39,6 +40,7 @@ class App extends Component {
                         <Route exact path="/" component={Landing} />
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/login" component={Login} />
+                        <Route exact path="/budget" component={Budget} />
                         <Switch>
                             <PrivateRoute exact path="/dashboard" component={Dashboard} />
                         </Switch>

@@ -2,8 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const BudgetSchema = new Schema({
-  item: { type: String, required: true },
-  price: String
+  salary: { type: Number, required: true },
+  // salary: String
+}, {
+  timestamps: true,
 });
 
 
