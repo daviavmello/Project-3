@@ -2,8 +2,9 @@ const router = require("express").Router();
 // const budgetController = require("../../controllers/budgetController");
 let Budget = require("../../models/Budget");
 
-router.route("/").get((req, res) => { 
-  budgetSchema.find()
+router.route("/").get((req, res) => {
+  console.log("API Back")  //check for connection to api backend
+  Budget.find()
     .then(budgetSchema => res.json(budgetSchema))
     .catch(err => res.status(400).json('Error: ' + err));
 });

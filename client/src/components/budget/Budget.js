@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
+import axios from 'axios';
 
 class Budget extends Component {
     constructor() {
         super();
         this.state = {
+            transactions: [],
             income: "",
             errors: {}
         };
     }
 
-    onChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
+//only does method after the on click
+    onSubmit = (event) => {
+        event.preventDefault()
+        this.getInfo()
     }
-
-    onSubmit = e => {
-        e.preventDefault();
-
-        const budget = {
-            income: this.state.income
-        };
-
-        // console.log(budget);
+//method that shows the information from the database
+    getInfo = () => {
+        console.log("API Front");
+        
+        axios.get("/api/budget")
+        .then(data => {
+            console.log(data)
+            this.setState({transactions:data.data})
+        })
+        .catch(err => console.log(err))
     }
 
     render() {
@@ -39,6 +44,14 @@ class Budget extends Component {
                             <h4>
                                 What's your monthly <b>income</b>:
                             </h4>
+                            {this.state.transactions.map(item => (
+                                <div key={item._id}>
+                                <p>{item.amount}</p>
+                                <p>{item.description}</p>
+                                </div>
+
+
+                            ))}
                         </div>
                         <form onSubmit={this.onSubmit}>
                             <div className="input-field col s12">

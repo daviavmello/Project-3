@@ -12,18 +12,24 @@ mongoose.connect(
 
 const budgetSeed  = [
 {
-  description: "shirt"
+  description: "shirt",
+  amount : 1000,
+  date:"11/9/2019",
+  income: true,
+  category: "test"
 },
 {
-  amount : 1000
+  description: "shirt",
+  amount : 1000,
+  date:"11/9/2019",
+  income: true,
+  category: "test"
 },
 {
-  date:"11/9/2019"
-},
-{
-  income: true
-},
-{
+  description: "shirt",
+  amount : 1000,
+  date:"11/9/2019",
+  income: true,
   category: "test"
 }
 
