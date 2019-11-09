@@ -16,6 +16,9 @@ const budgetSeed = [
     },
     {
       salary: 4000
+    },
+    {
+      salary: 5000
     }
 ];
 
