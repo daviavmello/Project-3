@@ -18,9 +18,10 @@ class Budget extends Component {
         event.preventDefault()
         this.getInfo()
     }
-//method that shows the information from the database
+//method that shows the information from seeds file from the database
+//YOU CURRENTLY HAVE TO GO TO THE ROUTE http://localhost:3000/budget TO TEST THIS
     getInfo = () => {
-        console.log("API Front");
+        console.log("API Front");//a console log to make sure application is properly connecting the api to the front end
         
         axios.get("/api/budget")
         .then(data => {
@@ -46,8 +47,10 @@ class Budget extends Component {
                             </h4>
                             {this.state.transactions.map(item => (
                                 <div key={item._id}>
-                                <p>{item.amount}</p>
                                 <p>{item.description}</p>
+                                <p>{item.amount}</p>
+                                <p>{item.date}</p>
+                                <p>{item.category}</p>
                                 </div>
 
 
