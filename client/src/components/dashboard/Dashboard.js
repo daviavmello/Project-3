@@ -2,13 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
+import incomeAPI from '../../utils/incomeAPI';
+import expenseAPI from '../../utils/expenseAPI';
 
 class Dashboard extends Component {
+    state = {
+        incomeData : [],
+    }
+    
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
     }
-
+    getIncome = () => {
+        incomeAPI.getIncomes().then(data => {
+            if (data.length > 0) this.setState({
+                incomeData : data
+            }) 
+        });
+    }
     render() {
         const { user } = this.props.auth;
 
@@ -30,7 +42,9 @@ class Dashboard extends Component {
                         }} onClick={this.onLogoutClick}>
                             Logout
                         </button>
-                    </div>
+                  
+                  </div>
+                    <div>{this.state.incomeData.map(income => <p>{income._id}</p>)}</div>
                 </div>
             </div>
         );

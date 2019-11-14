@@ -1,32 +1,70 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import axios from 'axios';
+import incomeAPI from '../../utils/incomeAPI';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/authActions';
+import API from '../../utils/API'
 
 class Budget extends Component {
     constructor() {
         super();
         this.state = {
-            transactions: [],
-            income: "",
-            errors: {}
+            expenses: [],
+            income: [],
+            type: "",
+            description: "",
+            amount: 0,
+            date: "",
+            errors: {},
+
         };
     }
 
+        handleChange = (event) => {
+            const{name,value} = event.target
+            this.setState({
+                [name]:value
+            })
+        }
+    //Create a method on the outside of render, and make sure to add a return to it. Then just call the method wherever we want
+       componentDidMount() {
+        const { user } = this.props.auth;
+           this.getInfo(user.id)
+       }
 //only does method after the on click
     onSubmit = (event) => {
         event.preventDefault()
-        this.getInfo()
+        const { user } = this.props.auth;
+        console.log(user)
+        // this.getInfo()
+        let dataInput = {
+            description:"test",
+            amount: this.state.amount,
+            date: "testDate",
+            type:"IncomeTest"
+        }
+        API.postBudget(user.id, dataInput)
+        .then(data=>{
+            this.getInfo(user.id)
+            console.log(data)
+        })
+        .catch(err=> console.log(err))
+        console.log(this.state.amount);
     }
 //method that shows the information from seeds file from the database
 //YOU CURRENTLY HAVE TO GO TO THE ROUTE http://localhost:3000/budget TO TEST THIS
-    getInfo = () => {
+    getInfo = (id) => {
         console.log("API Front");//a console log to make sure application is properly connecting the api to the front end
         
-        axios.get("/api/budget")
+        API.getBudget(id)
         .then(data => {
-            console.log(data)
-            this.setState({transactions:data.data})
+            console.log(data.data[0].budgetItem)
+            // this.setState({
+            //     income: data.data.incomeData,
+            //     expenses: data.data.expenseData
+            // });
         })
         .catch(err => console.log(err))
     }
@@ -45,20 +83,25 @@ class Budget extends Component {
                             <h4>
                                 What's your monthly <b>income</b>:
                             </h4>
-                            {this.state.transactions.map(item => (
+                            </div>
+                            {this.state.income.map(item => (
                                 <div key={item._id}>
+                                <p>{item.year}</p>
+                                <p>{item.month}</p>
+                                <p>{item.type}</p>
                                 <p>{item.description}</p>
-                                <p>{item.amount}</p>
-                                <p>{item.date}</p>
-                                <p>{item.category}</p>
+                                <p>{item.price}</p>
                                 </div>
 
 
                             ))}
-                        </div>
                         <form onSubmit={this.onSubmit}>
                             <div className="input-field col s12">
-                                <input onChange={this.onChange} value={this.state.name} error={errors.name} name="name" type="text" className={classnames("", { invalid: errors.name })} />
+                                <input 
+                                onChange={this.handleChange} 
+                                value={this.state.amount} error={errors.amount} name="amount" 
+                                type="text" 
+                                className={classnames("", { invalid: errors.name })} />
                                 <label htmlFor="name">Your current income</label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
@@ -83,4 +126,12 @@ class Budget extends Component {
 }
 
 
-export default Budget;
+
+Budget.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({ auth: state.auth });
+
+export default connect(mapStateToProps, { logoutUser })(Budget);

@@ -16,6 +16,7 @@ const users = require('./routes/api/users');
 const budget = require ("./routes/api/budget");
 
 
+
 mongoose.connect(db, { useNewUrlParser: true }).then(() => console.log("MongoDB connected")).catch((err) => console.log(err));
 
 app.use(passport.initialize());

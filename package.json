@@ -9,7 +9,7 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "seeds": "node scripts/seedDB.js"
+    "seeds": "concurrently \"node scripts/expenseseedDB.js\" \"node scripts/incomeseedDB.js\""
   },
   "author": "Davi Mello, Marcus Ellington",
   "license": "ISC",
