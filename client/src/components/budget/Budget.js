@@ -15,10 +15,10 @@ class Budget extends Component {
             income: [],
             type: "",
             description: "",
-            amount: 0,
+            amount: "",
             date: "",
             errors: {},
-
+            userExpenses: []
         };
     }
 
@@ -40,10 +40,10 @@ class Budget extends Component {
         console.log(user)
         // this.getInfo()
         let dataInput = {
-            description:"test",
+            description: this.state.description,
             amount: this.state.amount,
-            date: "testDate",
-            type:"IncomeTest"
+            date: this.state.date,
+            type: this.state.type
         }
         API.postBudget(user.id, dataInput)
         .then(data=>{
@@ -61,13 +61,17 @@ class Budget extends Component {
         API.getBudget(id)
         .then(data => {
             console.log(data.data[0].budgetItem)
-            // this.setState({
-            //     income: data.data.incomeData,
-            //     expenses: data.data.expenseData
-            // });
+            let budgetItems = data.data[0].budgetItem;
+            this.setState({
+                // income: data.data.incomeData,
+                // expenses: data.data.expenseData
+                userExpenses: budgetItems
+            });
         })
         .catch(err => console.log(err))
     }
+
+    // filter over user expenses array based on type and then map over
 
     render() {
         const { errors } = this.state;
@@ -99,10 +103,37 @@ class Budget extends Component {
                             <div className="input-field col s12">
                                 <input 
                                 onChange={this.handleChange} 
-                                value={this.state.amount} error={errors.amount} name="amount" 
+                                value={this.state.description} error={errors.amount} name="description" 
                                 type="text" 
                                 className={classnames("", { invalid: errors.name })} />
                                 <label htmlFor="name">Your current income</label>
+                                <span className="red-text">{errors.name}</span>
+                            </div>
+                            <div className="input-field col s12">
+                                <input 
+                                onChange={this.handleChange} 
+                                value={this.state.amount} error={errors.amount} name="amount" 
+                                type="text" 
+                                className={classnames("", { invalid: errors.name })} />
+                                <label htmlFor="name">Transaction</label>
+                                <span className="red-text">{errors.name}</span>
+                            </div>
+                            <div className="input-field col s12">
+                                <input 
+                                onChange={this.handleChange} 
+                                value={this.state.date} error={errors.amount} name="date" 
+                                type="text" 
+                                className={classnames("", { invalid: errors.name })} />
+                                <label htmlFor="name">Date</label>
+                                <span className="red-text">{errors.name}</span>
+                            </div>
+                            <div className="input-field col s12">
+                                <input 
+                                onChange={this.handleChange} 
+                                value={this.state.type} error={errors.amount} name="type" 
+                                type="text" 
+                                className={classnames("", { invalid: errors.name })} />
+                                <label htmlFor="name">Income or Expense </label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
