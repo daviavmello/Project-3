@@ -18,7 +18,7 @@ class Budget extends Component {
             amount: "",
             date: "",
             errors: {},
-            userExpenses: []
+            transactions: []
         };
     }
 
@@ -65,7 +65,7 @@ class Budget extends Component {
             this.setState({
                 // income: data.data.incomeData,
                 // expenses: data.data.expenseData
-                userExpenses: budgetItems
+                transactions: budgetItems
             });
         })
         .catch(err => console.log(err))
