@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
-// import incomeAPI from "../../utils/incomeAPI";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import API from "../../utils/API";
+import M from "materialize-css";
 
 class Budget extends Component {
   constructor() {
@@ -20,6 +20,8 @@ class Budget extends Component {
       errors: {},
       transactions: []
     };
+    
+    this.date = React.createRef();
   }
 
   handleChange = event => {
@@ -32,12 +34,31 @@ class Budget extends Component {
   componentDidMount() {
     const { user } = this.props.auth;
     this.getInfo(user.id);
+    
+  // Materialize
+    var context = this
+    document.addEventListener('DOMContentLoaded', function() {
+      var elemsDate = document.querySelectorAll('.datepicker');
+      M.Datepicker.init(elemsDate, {
+        format: "mm-dd-yyyy",
+        onClose: context.handleDate
+      });
+    });
   }
+
+  handleDate = () => {
+    this.setState({
+      date: this.date.current.value,
+    })
+    console.log('Field: ' + this.state.date);
+  }
+
+
   //only does method after the on click
   onSubmit = event => {
     event.preventDefault();
     const { user } = this.props.auth;
-    console.log(user);
+    // console.log(user);
     // this.getInfo()
     let dataInput = {
       description: this.state.description,
@@ -45,6 +66,7 @@ class Budget extends Component {
       date: this.state.date,
       type: this.state.type
     };
+    console.log(dataInput)
     API.postBudget(user.id, dataInput)
       .then(data => {
         this.getInfo(user.id);
@@ -52,7 +74,21 @@ class Budget extends Component {
       })
       .catch(err => console.log(err));
     console.log(this.state.amount);
+
+    // Clear and reset form input fields
+    this.setState({
+      expenses: [],
+      income: [],
+      type: "",
+      description: "",
+      amount: "",
+      date: "",
+      errors: {},
+      transactions: []
+    })
+
   };
+
   //method that shows the information from seeds file from the database
   //YOU CURRENTLY HAVE TO GO TO THE ROUTE http://localhost:3000/budget TO TEST THIS
   getInfo = id => {
@@ -71,8 +107,8 @@ class Budget extends Component {
       .catch(err => console.log(err));
   };
 
-  // filter over user expenses array based on type and then map over
 
+// Renders transaction in a table
   renderTransactions(item) {
     return (
       <tr key={item._id}>
@@ -101,7 +137,7 @@ class Budget extends Component {
               </h4>
             </div>
 ​
-            <form onSubmit={this.onSubmit}>
+            <form id="form-transactions" onSubmit={this.onSubmit}>
               <div className="input-field col s12">
                 <input
                   onChange={this.handleChange}
@@ -114,6 +150,7 @@ class Budget extends Component {
                 <label htmlFor="name">Your current income</label>
                 <span className="red-text">{errors.name}</span>
               </div>
+
               <div className="input-field col s12">
                 <input
                   onChange={this.handleChange}
@@ -126,19 +163,22 @@ class Budget extends Component {
                 <label htmlFor="name">Transaction</label>
                 <span className="red-text">{errors.name}</span>
               </div>
+
               <div className="input-field col s12">
                 <input
-                  onChange={this.handleChange}
-                  value={this.state.date}
+                  onChange={this.handleDate}
+                  ref={this.date}
                   error={errors.amount}
                   name="date"
                   type="text"
-                  className={classnames("", { invalid: errors.name })}
+                  id="date"
+                  className= "datepicker"
                 />
-                <label htmlFor="name">Date</label>
+                  <label htmlFor="date">Date</label>
                 <span className="red-text">{errors.name}</span>
               </div>
-              <div className="input-field col s12">
+
+                <div className="input-field col s12">
                 <input
                   onChange={this.handleChange}
                   value={this.state.type}
@@ -147,9 +187,10 @@ class Budget extends Component {
                   type="text"
                   className={classnames("", { invalid: errors.name })}
                 />
-                <label htmlFor="name">Income or Expense </label>
+                <label htmlFor="name">Transaction or Amount</label>
                 <span className="red-text">{errors.name}</span>
               </div>
+
               <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                 <button
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"
@@ -169,13 +210,14 @@ class Budget extends Component {
             </form>
           </div>
         </div>
+        
         <table className="table">
-          <thead className="thead-dark">
+          <thead>
             <tr>
-              <th scope="col">Description</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Date</th>
-              <th scope="col">Type</th>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Type</th>
             </tr>
           </thead>
           <tbody>{this.state.transactions.map(this.renderTransactions)}</tbody>
