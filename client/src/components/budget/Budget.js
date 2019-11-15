@@ -105,7 +105,7 @@ class Budget extends Component {
                                 value={this.state.description} error={errors.amount} name="description" 
                                 type="text" 
                                 className={classnames("", { invalid: errors.name })} />
-                                <label htmlFor="name">Your current income</label>
+                                <label htmlFor="name">Name or description of item</label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="input-field col s12">
@@ -114,7 +114,7 @@ class Budget extends Component {
                                 value={this.state.amount} error={errors.amount} name="amount" 
                                 type="text" 
                                 className={classnames("", { invalid: errors.name })} />
-                                <label htmlFor="name">Transaction</label>
+                                <label htmlFor="name">Amount</label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="input-field col s12">
