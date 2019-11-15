@@ -88,13 +88,12 @@ class Budget extends Component {
                                 What's your monthly <b>income</b>:
                             </h4>
                             </div>
-                            {this.state.income.map(item => (
+                            {this.state.transactions.map(item => (
                                 <div key={item._id}>
-                                <p>{item.year}</p>
-                                <p>{item.month}</p>
-                                <p>{item.type}</p>
                                 <p>{item.description}</p>
-                                <p>{item.price}</p>
+                                <p>{item.amount}</p>
+                                <p>{item.date}</p>
+                                <p>{item.type}</p>
                                 </div>
 
 
