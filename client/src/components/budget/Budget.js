@@ -147,7 +147,7 @@ class Budget extends Component {
                   type="text"
                   className={classnames("", { invalid: errors.name })}
                 />
-                <label htmlFor="name">Your current income</label>
+                <label htmlFor="name">Name of transaction</label>
                 <span className="red-text">{errors.name}</span>
               </div>
 
@@ -160,7 +160,7 @@ class Budget extends Component {
                   type="text"
                   className={classnames("", { invalid: errors.name })}
                 />
-                <label htmlFor="name">Transaction</label>
+                <label htmlFor="name">Amount</label>
                 <span className="red-text">{errors.name}</span>
               </div>
 
@@ -187,7 +187,7 @@ class Budget extends Component {
                   type="text"
                   className={classnames("", { invalid: errors.name })}
                 />
-                <label htmlFor="name">Transaction or Amount</label>
+                <label htmlFor="name">Income, or Expense</label>
                 <span className="red-text">{errors.name}</span>
               </div>
 
