@@ -1,7 +1,7 @@
 const router = require("express").Router();
 // const budgetController = require("../../controllers/budgetController");
-let Income = require("../../models/incomeModel");
-let Expense = require("../../models/expenseModel");
+// let Income = require("../../models/incomeModel");
+// let Expense = require("../../models/expenseModel");
 let Budget = require("../../models/budget");
 
 router.route("/:id").get((req, res) => {
