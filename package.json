@@ -9,7 +9,8 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "seeds": "concurrently \"node scripts/expenseseedDB.js\" \"node scripts/incomeseedDB.js\""
+    "seeds": "concurrently \"node scripts/expenseseedDB.js\" \"node scripts/incomeseedDB.js\"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Davi Mello, Marcus Ellington",
   "license": "ISC",
