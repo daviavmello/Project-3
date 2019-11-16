@@ -2,7 +2,7 @@ const router = require("express").Router();
 // const budgetController = require("../../controllers/budgetController");
 // let Income = require("../../models/incomeModel");
 // let Expense = require("../../models/expenseModel");
-let Budget = require("../../models/budget");
+let Budget = require("../../models/Budget");
 
 router.route("/:id").get((req, res) => {
   console.log("API income")  //check for proper connection to api backend
