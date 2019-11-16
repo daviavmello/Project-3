@@ -34,11 +34,13 @@ class Dashboard extends Component {
                                 You are logged in
                             </p>
                         </h4>
-                        <button className="btn btn-large waves-effect waves-light hoverable blue accent-3" style={{
+                        <button className="btn btn-large waves-effect waves-light hoverable accent-3" style={{
                             width: "150px",
                             borderRadius: 30,
                             letterSpacing: "1.5px",
                             marginTop: "1rem",
+                            backgroundColor: '#276DB9'
+
                         }} onClick={this.onLogoutClick}>
                             Logout
                         </button>

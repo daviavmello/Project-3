@@ -20,7 +20,7 @@ class Budget extends Component {
       errors: {},
       transactions: []
     };
-    
+
     this.date = React.createRef();
   }
 
@@ -34,11 +34,11 @@ class Budget extends Component {
   componentDidMount() {
     const { user } = this.props.auth;
     this.getInfo(user.id);
-    
-  // Materialize
-    var context = this
-    document.addEventListener('DOMContentLoaded', function() {
-      var elemsDate = document.querySelectorAll('.datepicker');
+
+    // Materialize
+    var context = this;
+    document.addEventListener("DOMContentLoaded", function() {
+      var elemsDate = document.querySelectorAll(".datepicker");
       M.Datepicker.init(elemsDate, {
         format: "mm-dd-yyyy",
         onClose: context.handleDate
@@ -48,11 +48,10 @@ class Budget extends Component {
 
   handleDate = () => {
     this.setState({
-      date: this.date.current.value,
-    })
-    console.log('Field: ' + this.state.date);
-  }
-
+      date: this.date.current.value
+    });
+    console.log("Field: " + this.state.date);
+  };
 
   //only does method after the on click
   onSubmit = event => {
@@ -66,7 +65,7 @@ class Budget extends Component {
       date: this.state.date,
       type: this.state.type
     };
-    console.log(dataInput)
+    console.log(dataInput);
     API.postBudget(user.id, dataInput)
       .then(data => {
         this.getInfo(user.id);
@@ -85,8 +84,7 @@ class Budget extends Component {
       date: "",
       errors: {},
       transactions: []
-    })
-
+    });
   };
 
   //method that shows the information from seeds file from the database
@@ -107,8 +105,7 @@ class Budget extends Component {
       .catch(err => console.log(err));
   };
 
-
-// Renders transaction in a table
+  // Renders transaction in a table
   renderTransactions(item) {
     return (
       <tr key={item._id}>
@@ -136,7 +133,7 @@ class Budget extends Component {
                 What's your monthly <b>income</b>:
               </h4>
             </div>
-​
+            ​
             <form id="form-transactions" onSubmit={this.onSubmit}>
               <div className="input-field col s12">
                 <input
@@ -172,13 +169,13 @@ class Budget extends Component {
                   name="date"
                   type="text"
                   id="date"
-                  className= "datepicker"
+                  className="datepicker"
                 />
-                  <label htmlFor="date">Date</label>
+                <label htmlFor="date">Date</label>
                 <span className="red-text">{errors.name}</span>
               </div>
 
-                <div className="input-field col s12">
+              <div className="input-field col s12">
                 <input
                   onChange={this.handleChange}
                   value={this.state.type}
@@ -193,14 +190,12 @@ class Budget extends Component {
 
               <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                 <button
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  className="btn btn-large waves-effect waves-light hoverable accent-3"
                   style={{
-                    width: "150px",
+                    width: "140px",
+                    borderRadius: "30px",
                     letterSpacing: "1.5px",
-                    borderRadius: 30,
-                    borderWidth: 3,
-                    borderColor: "#111111",
-                    marginTop: "1rem"
+                    backgroundColor: "#222"
                   }}
                   type="submit"
                 >
@@ -210,7 +205,7 @@ class Budget extends Component {
             </form>
           </div>
         </div>
-        
+
         <table className="table">
           <thead>
             <tr>
