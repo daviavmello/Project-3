@@ -18,7 +18,8 @@ class Budget extends Component {
       amount: "",
       date: "",
       errors: {},
-      transactions: []
+      transactions: [],
+      totalBudget: 0
     };
 
     this.date = React.createRef();
@@ -34,7 +35,7 @@ class Budget extends Component {
   componentDidMount() {
     const { user } = this.props.auth;
     this.getInfo(user.id);
-
+    
     // Materialize
     var context = this;
     document.addEventListener("DOMContentLoaded", function() {
@@ -44,6 +45,7 @@ class Budget extends Component {
         onClose: context.handleDate
       });
     });
+   
   }
 
   handleDate = () => {
@@ -87,22 +89,26 @@ class Budget extends Component {
       errors: {},
       transactions: []
     })
-    let totalIncome = 0;
-           let totalExpense = 0;
-           for (let i = 0; i < this.state.transactions.length; i++) {
-               console.log(this.state.transactions[i].type)
-               if (this.state.transactions[i].type === "Income"){
-               totalIncome += this.state.transactions[i].amount
-               }
-               if (this.state.transactions[i].type === "Expense"){
-               totalExpense += this.state.transactions[i].amount
-               }
-           }
-           let totalBudget = totalIncome - totalExpense;
-           console.log(totalBudget);
-           return totalBudget;
-  };
+    this.calculateTotal();
 
+  };
+  calculateTotal = () => {
+    let totalIncome = 0;
+    let totalExpense = 0;
+    for (let i = 0; i < this.state.transactions.length; i++) {
+        console.log(this.state.transactions[i].type)
+        if (this.state.transactions[i].type === "Income"){
+        totalIncome += this.state.transactions[i].amount
+        }
+        if (this.state.transactions[i].type === "Expense"){
+        totalExpense += this.state.transactions[i].amount
+        }
+    }
+    let totalBudget = totalIncome - totalExpense;
+    this.setState({totalBudget: totalBudget})
+    console.log(totalBudget);
+    return totalBudget;
+  }
   //method that shows the information from seeds file from the database
   //YOU CURRENTLY HAVE TO GO TO THE ROUTE http://localhost:3000/budget TO TEST THIS
   getInfo = id => {
@@ -117,6 +123,7 @@ class Budget extends Component {
           // expenses: data.data.expenseData
           transactions: budgetItems
         });
+        this.calculateTotal();
       })
       .catch(err => console.log(err));
   };
@@ -237,6 +244,7 @@ class Budget extends Component {
           </thead>
           <tbody>{this.state.transactions.map(this.renderTransactions)}</tbody>
         </table>
+        <h3>Total Budget = {this.state.totalBudget}</h3>
       </div>
     );
   }
