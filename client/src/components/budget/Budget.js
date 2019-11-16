@@ -60,12 +60,14 @@ class Budget extends Component {
     const { user } = this.props.auth;
     // console.log(user);
     // this.getInfo()
+    
     let dataInput = {
       description: this.state.description,
       amount: this.state.amount,
       date: this.state.date,
       type: this.state.type
     };
+    //Marking for potential future use
     console.log(dataInput)
     API.postBudget(user.id, dataInput)
       .then(data => {
@@ -86,7 +88,20 @@ class Budget extends Component {
       errors: {},
       transactions: []
     })
-
+    let totalIncome = 0;
+           let totalExpense = 0;
+           for (let i = 0; i < this.state.transactions.length; i++) {
+               console.log(this.state.transactions[i].type)
+               if (this.state.transactions[i].type === "Income"){
+               totalIncome += this.state.transactions[i].amount
+               }
+               if (this.state.transactions[i].type === "Expense"){
+               totalExpense += this.state.transactions[i].amount
+               }
+           }
+           let totalBudget = totalIncome - totalExpense;
+           console.log(totalBudget);
+           return totalBudget;
   };
 
   //method that shows the information from seeds file from the database
@@ -118,10 +133,14 @@ class Budget extends Component {
         <td>{item.type}</td>
       </tr>
     );
+   
   }
+
+  
 
   render() {
     const { errors } = this.state;
+    
 
     return (
       <div className="container">
