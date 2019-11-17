@@ -23,3 +23,7 @@ Deployed on Heroku https://surplus-finance.herokuapp.com/
   <li>Passport for user authentication</li>
   <li>Materialize for front-end styling</li>
 </ul>  
+
+<b>Images of app:</b>
+
+
