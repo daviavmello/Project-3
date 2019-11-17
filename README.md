@@ -7,6 +7,6 @@ Built following the tutorial at https://blog.bitsrc.io/build-a-login-auth-app-wi
 
 Deployed on Heroku https://surplus-finance.herokuapp.com/
 
-Budgeting App(React Js)
+<b>Budgeting App(React Js)</b>
 
 A  personal budgetting app that allows users track there transaction data.
